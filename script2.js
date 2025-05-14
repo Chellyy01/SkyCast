@@ -1,4 +1,4 @@
-'use strict';
+"use strict";
 
 const alert = document.querySelector(".alert");
 const getForecast = document.querySelector(".get-forecast-btn");
@@ -11,17 +11,18 @@ if (btnLogin) {
       localStorage.setItem("username", name);
       window.location.href = "dashboard.html";
     }
-   document.getElementById("username").value = '';
+    document.getElementById("username").value = "";
   };
 
   btnLogin.addEventListener("click", loginFunction);
 
-  document.getElementById("username").addEventListener("keydown", function(event) {
-  if (event.key === "Enter") {
-    loginFunction();
-  }
-});
-
+  document
+    .getElementById("username")
+    .addEventListener("keydown", function (event) {
+      if (event.key === "Enter") {
+        loginFunction();
+      }
+    });
 }
 
 if (getForecast) {
@@ -31,7 +32,6 @@ if (getForecast) {
 }
 
 async function loadWeather() {
-  
   const cityInput = document.getElementById("city");
   const city = cityInput ? cityInput.value.trim() : "";
 
@@ -41,24 +41,41 @@ async function loadWeather() {
     return;
   } else {
     alert.textContent = "";
-  
   }
 
-     // Display the entered city at the top of the page
-  const cityDisplay = document.getElementById("city-display");
-  if (cityDisplay) {
-    cityDisplay.textContent = `Weather forecast for: ${city}`;
-  }
-
-  const apiKey = "1273d9b9806f4ea387e94727251405"; 
+  const apiKey = "1273d9b9806f4ea387e94727251405";
   const url = `https://api.weatherapi.com/v1/forecast.json?key=${apiKey}&q=${encodeURIComponent(
     city
   )}&days=7`;
 
   try {
     const res = await fetch(url);
-    if (!res.ok) throw new Error("Network response was not ok");
     const data = await res.json();
+
+    console.log(data);
+
+    if (!res.ok || data.error) {
+      alert.textContent = `Please input a valid city/location`;
+      return;
+    }
+
+    // Normalizing user input and API result for comparison
+    const inputNormalized = city.toLowerCase().replace(/\s+/g, "");
+    const resultNameNormalized = data.location.name
+      .toLowerCase()
+      .replace(/\s+/g, "");
+
+    // If the location name doesn't include the input, reject it
+    if (!resultNameNormalized.includes(inputNormalized)) {
+      alert.textContent = "Please input a valid city/location";
+      return;
+    }
+
+    // Display the entered city at the top of the page
+    const cityDisplay = document.getElementById("city-display");
+    if (cityDisplay) {
+      cityDisplay.textContent = `Weather forecast for: ${data.location.name}, ${data.location.country}`;
+    }
 
     const forecastDiv = document.getElementById("forecast");
     forecastDiv.innerHTML = "";
@@ -106,7 +123,6 @@ async function loadWeather() {
     }
 
     cityInput.value = "";
-
   } catch (err) {
     console.error(err);
     const forecastDiv = document.getElementById("forecast");
@@ -114,9 +130,9 @@ async function loadWeather() {
       forecastDiv.innerHTML =
         "Error loading weather data. Please check the city/state/country name.";
   }
-};
+}
 
-document.getElementById("city").addEventListener("keydown", function(event) {
+document.getElementById("city").addEventListener("keydown", function (event) {
   if (event.key === "Enter") {
     loadWeather();
   }
