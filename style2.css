@@ -13,7 +13,7 @@ body {
   background-position: center;
   background-repeat: no-repeat;
   box-sizing: border-box;
-  min-height: 100vh; 
+  min-height: 100vh;
   margin: 0;
 }
 
@@ -33,12 +33,13 @@ body {
   
 }
 
-input, button {
-  padding: 0.5rem 1rem; 
+input,
+button {
+  padding: 0.5rem 1rem;
   margin: 1rem;
   font-size: 1rem;
   border: none;
-box-shadow: 0 0 10px rgba(0,0,0,0.1);
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
 #forecast {
@@ -55,24 +56,115 @@ box-shadow: 0 0 10px rgba(0,0,0,0.1);
 }
 
 .highlight {
-  background-color: #d1ffd1; 
-  border: 2px solid #4caf50; 
+  background-color: #d1ffd1;
+  border: 2px solid #4caf50;
   font-weight: bold;
   box-shadow: 0 0 10px rgba(0, 128, 0, 0.4);
 }
 .alert {
-   font-size: 0.8rem;
-   color: red;
-   
+  font-size: 0.8rem;
+  color: red;
 }
 .hidden {
   opacity: 0;
 }
 
+#hourly-forecast {
+  display: flex;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  gap: 1rem;
+  padding-bottom: 1rem;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+  background-color: rgba(44, 57, 78, 0.5);
+  color: white;
+  border-radius: 8px;
+  margin-top: 5rem;
+  font-size: 0.8rem;
+  opacity: 0;
+}
+
+.hour {
+  flex: 0 0 calc(100% / 6 - 1rem);
+  padding: 0.5rem;
+  scroll-snap-align: start;
+  text-align: center;
+}
+
+#hourly-forecast::-webkit-scrollbar {
+  display: none;
+}
+
+#map {
+  margin: 5rem auto;
+  height: 20rem;
+  width: 100%;
+}
+.day {
+  transition: transform 0.3s ease, background-color 0.3s ease;
+}
+.day:hover {
+  transform: scale(1.02);
+  background-color: #333;
+}
+
+.day.highlight {
+  background-color: #4b5563;
+  color: white;
+  border-radius: 10px;
+}
+
+.summary-box {
+  display: flex;
+  flex-direction: column;
+}
+
+#back-btn {
+  display: none;
+  margin: 0;
+  background-color: transparent;
+  color: white;
+}
+
+.weather-metrics {
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  gap: 1rem;
+  background-color: rgba(26, 48, 80, 0.7); 
+  padding: 1rem;
+  border-radius: 10px;
+  color: white;
+  opacity: 0;
+}
+
+.metric {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  flex: 1 1 100px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 8px;
+  padding: 10px;
+}
+
+.metric h4 {
+  margin: 0;
+  font-size: 1rem;
+  color: #b0c4de;
+}
+
+.metric p {
+  margin: 5px 0 0;
+  font-size: 1.2rem;
+  font-weight: bold;
+}
+
 @media (max-width: 25rem) {
   input {
-   
     font-size: 0.8rem;
   }
-
 }

@@ -1,0 +1,48 @@
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Weather Graph</title>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    canvas {
+      max-width: 600px;
+      margin: 2rem auto;
+      display: block;
+    }
+  </style>
+</head>
+<body>
+  <h2 style="text-align: center;">Hourly Weather Graph</h2>
+  <canvas id="weatherChart"></canvas>
+
+  <script>
+    const hourData = JSON.parse(localStorage.getItem("selectedHour"));
+
+    if (!hourData) {
+      document.body.innerHTML = "<p style='text-align:center;'>No hour data found.</p>";
+    } else {
+      const ctx = document.getElementById("weatherChart").getContext("2d");
+      new Chart(ctx, {
+        type: "bar",
+        data: {
+          labels: ["Temp (°C)", "Wind (kph)", "Humidity (%)"],
+          datasets: [{
+            label: `Weather at ${hourData.time}`,
+            data: [hourData.temp_c, hourData.wind_kph, hourData.humidity],
+            backgroundColor: ["#4bc0c0", "#ff6384", "#36a2eb"]
+          }]
+        },
+        options: {
+          responsive: true,
+          plugins: {
+            legend: { display: true }
+          }
+        }
+      });
+    }
+  </script>
+</body>
+</html> -->
+
+

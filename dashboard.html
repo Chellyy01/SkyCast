@@ -1,23 +1,63 @@
 <!-- dashboard.html -->
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>SkyCast Dashboard</title>
-  <link rel="stylesheet" href="style2.css" />
-</head>
-<body>
-  <div class="dashboard-container">
-    <h1 id="greeting"></h1>
-    <input type="text" id="city" placeholder="Enter city, state, or country" />
-    <button class="get-forecast-btn">Get Forecast</button>
-    <p class="alert"></p>
-     <h2 style="color: white;" id="city-display"></h2>
-    <div id="forecast"></div>
-  </div>
-  <script src="script2.js"></script>
-</body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>SkyCast Dashboard</title>
+    <link rel="stylesheet" href="style2.css" />
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
+    />
+    <script src="script2.js" defer=""></script>
+    <script
+      src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"
+      defer=""
+    ></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js" defer=""></script>
+  </head>
+  <body>
+    <div class="dashboard-container">
+      <div id="search-section">
+        <h1 id="greeting"></h1>
+        <input
+          type="text"
+          id="city"
+          placeholder="Enter city, state, or country"
+        />
+        <button class="get-forecast-btn">Get Forecast</button>
+        <p class="alert"></p>
+      </div>
+
+      <button id="back-btn">Back</button>
+
+      <div id="summary" class="summary-box" style="color: white"></div>
+
+      <div id="hourly-forecast" class="hourly-grid"></div>
+
+      <div id="forecast"></div>
+
+      <div id="map"></div>
+
+      <div class="weather-metrics">
+        <div class="metric">
+          <h4>UV Index</h4>
+          <p id="uv-index">5</p>
+        </div>
+        <div class="metric">
+          <h4>Wind</h4>
+          <p id="wind">12 km/h</p>
+        </div>
+        <div class="metric">
+          <h4>Humidity</h4>
+          <p id="humidity">68%</p>
+        </div>
+        <div class="metric">
+          <h4>Pressure</h4>
+          <p id="pressure">1012 hPa</p>
+        </div>
+      </div>
+    </div>
+  </body>
 </html>
-
-
